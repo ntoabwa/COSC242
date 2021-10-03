@@ -1,0 +1,159 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "getopt.h"
+#include <time.h>
+#include <string.h>
+#include "mylib.h"
+#include "htable.h"
+#include <math.h>
+
+static void print_info(int freq, char *word) {
+    printf("%-4d %s\n", freq, word);
+}
+
+static int factors(int x) {
+    int f = 2;
+    while (f <= sqrt(x)){
+        if (x % f == 0) {
+            return 0;
+        }else{
+            f = f +1;
+        }
+    }
+    return 1;
+}
+
+int primegt(int n){
+    int bound = n;
+    while (bound > 0) {
+        if (factors(bound)){
+            break;
+        } else {
+            bound = bound + 1;
+        }
+    }
+    return bound;
+}
+
+static void displayInfo() {
+    printf("Usage: ./asgn [OPTION]... <STDIN>\n\n");
+    printf("Perform various operations using a hash table. By default, words are\n");
+    printf("read from stdin and added to the hash table, before being printed out\n");
+    printf("alongside their frequencies to stdout.\n\n");
+    printf(" -c FILENAME  Check spelling of words in FILENAME using words\n");
+    printf(" \t      from stdin as dictionary. Print unknown words to\n");
+    printf(" \t	 stdout, timing infor & count to stderr (ignore -p)\n");
+    printf(" -d           Use double hashing (linear probing is the default\n");
+    printf(" -e           Display entire contents of hash table on stderr\n");
+    printf(" -p           Print stats info instead of frequencies & words\n");
+    printf(" -s SNAPSHOTS Show SNAPSHOTS stats snapshots (if -p is used)\n");
+    printf(" -t TABLESIZE Use the first prime >= TABLESIZE as htable size\n\n");
+    printf(" -h           Display this message\n");
+}
+
+
+int main(int argc, char **argv){
+    htable h;
+    FILE *file = NULL;
+    char option;
+    char word[256];
+    const char *optstring = "c:deps:t:h";
+    int capacity = 113;
+    hashing_t method = LINEAR_P;
+    double search, fill;
+    clock_t end, start;
+    int unknownWords , snapshots, checkFile, displayTable , printStats ,snapShots;
+    unknownWords = 0;
+    snapshots = 0;
+    checkFile = 0;
+    displayTable = 0;
+    printStats = 0;
+    snapShots = 0;
+
+   
+    
+	
+    while ((option = getopt(argc, argv, optstring)) != EOF) {
+	switch (option) {
+            case 'c':
+                checkFile = 1;
+                file = fopen(optarg, "r");
+                if(file == NULL){
+                    fprintf(stderr, "Can't open file '%s' using more r.\n", argv[optind-1]);
+                    exit(EXIT_FAILURE);
+                }
+                break;
+            case 'd':
+                method = DOUBLE_H;
+                break;
+            case 'e':
+                displayTable = 1;
+                break;
+            case 'p':
+                printStats = 1;
+                break;
+            case 's':
+                snapShots = 1;
+                snapshots = atoi(optarg);
+                break;
+            case 't':
+                capacity = primegt(atoi(optarg));
+                break;
+            case 'h':
+                displayInfo();
+                return EXIT_SUCCESS;
+                break;
+            default :
+                exit(EXIT_FAILURE);
+        }
+    }
+
+    h = htable_new(capacity, method);
+
+           
+    
+    start = clock();
+    while (getword(word,sizeof word, stdin) != EOF){
+        htable_insert(h, word);
+    }
+    end = clock();
+    fill = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+       
+    if(checkFile == 1 || (checkFile == 1 && printStats == 1 && snapShots == 1)){
+        start = clock();
+        while (getword(word,sizeof word, file) != EOF){
+            if(htable_search(h, word) == 0){
+                printf("%s\n", word);
+                unknownWords++;
+            }
+        }
+        end = clock();
+	search = ((double) (end - start)) / CLOCKS_PER_SEC;
+        
+        printf("Fill Time\t: %2.6f\n", fill);
+        printf("Search Time\t: %2.6f\n", search);
+        printf("Unknown Words\t: %d\n", unknownWords);
+    }
+
+    if(displayTable == 1){
+        htable_print_entire_table(h);
+    }
+
+    if(printStats == 1 && snapShots ==0){
+	htable_print_stats(h, stdout , 10);
+    }
+
+    if(printStats == 1 && snapShots ==1){
+	htable_print_stats(h,stdout,snapshots);
+    } else if( printStats == 0) {
+
+     
+	htable_print(h, print_info);
+
+    }
+
+    htable_free(h);
+
+    return EXIT_SUCCESS;
+}

@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main (void) {
+
+    int my_array[] = { 5, 2, 7, 3, 4 };
+    int biggest, smallest;
+    max_min(my_array, 5, &biggest, &smallest);
+    printf("max value is %d, min value is %d\n", biggest, smallest);
+
+}
+
+void max_min(int *a, int n, int *max, int *min) {
+
+    int i;
+
+    for (int i = 0; i < n-1; i++) {
+        if (a[i] > a[i+1]) {
+            max = &a[i];
+        }
+
+        if (a[i] < a[i+1]) {
+            min = & a[i];
+        }
+
+    }
+        
+}

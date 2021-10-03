@@ -1,0 +1,39 @@
+Name: Ngaaia Toabwa
+Student ID: 7331344
+Group No: 25
+
+My contributions to the assignment
+Effort: 97%
+Usefulness: 99%
+
+The contributions of Rae Villafuerte
+Effort: 98%
+Usefulness:99% 
+
+The contributions of Ezra Collins
+Effort: 97%
+Usefulness:98% 
+
+My thoughts on the positives and negatives of working in a group.
+
+I personally find this group assignment to be useful since it teaches me ways on how to work
+in a group and code together. We managed to complete the assignment on time, and this is due
+to all the work that we put in in every meeting that we have for the past two weeks. I also
+learn a lot of things from the other group members and their determination in finishing the
+assignment has given me motivation to keep working on it as well. 
+
+We start working on the assignment from the htable.c which is the easy part for us. This is
+because we all try to complete our labs 11 first during the lab times. We reuse the files from
+the labs, so this part was straight forward for us and we didn’t really spend a lot of time on
+it, except for the change in including the method of linear probing or double hashing and including
+the stats information. However we were able to understand it by exchanging ideas on how we would
+implement it in our new, insert and search function.
+
+The second part is more difficult for me and that is the main method and just the whole of asgn.c
+file. I had to learn about the opt library and then figuring out ways on how we could use it for
+the different options we need to implement using the switch method. Each group member I believe
+always did their own research separately or own implementation on some functions since most of the
+time we would come, and we have ideas on how to do things. We did face many bugs and errors while
+doing this and some were easy to fix while others would take a very long time. We have a few
+differences as well on how we would implement every method of the switch cases. In the end we just
+choose whichever is best to get the assignment done. 

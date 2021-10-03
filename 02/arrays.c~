@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stlib.h>
+
+int main (void) {
+
+#define ARRAY_SIZE 10
+    
+    double judge_1[ARRAY_SIZE];
+    double judge_2[ARRAY_SIZE];
+    double judge_3[ARRAY_SIZE];
+    double a, b, c;
+    int lines = 0;
+    int i = 0;
+    double total_1 = 0;
+    double total_2 = 0;
+    double total_3 = 0;
+    
+    while (4 == scanf("%d%lg%lg%lg", &n, &a, &b, &c)) {
+            for ( int i = 0; i < ARRAY_SIZE; i++) {
+                judge_1[i] = a;
+                judge_2[i] = b;
+                judge_3[i] = c;
+            }
+            lines++;
+    }
+
+    for ( int i = 0; i < ARRAY_SIZE; i++) {
+        total_1 += judge_1[i];
+        total_2 += judge_2[i];
+        total_3 += judge_3[i];
+    }
+
+    double mean_1 = total_1 / lines;
+    double mean_2 = total_2 / lines;
+    double mean_3 = total_3 / lines;
+
+    
+    
+  
+        
+        
+            
+                                           
+                                                                              
+}
+    
+                                                       
+    
+    

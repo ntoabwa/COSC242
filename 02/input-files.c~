@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main (void) {
+    int n;
+    double a, b, c;
+    double best_score;
+    int best_competitor;
+    
+    while (4 == scanf("%d%lg%lg%lg", &n, &a, &b, &c)) {
+        best_competitor = n;
+        best_score = a + b + c;
+    }
+
+    printf("Winner is: %d", best_competitor);
+
+    return EXIT_SUCCESS;
+}
+
+        
+
+           
+        
+
+    
+
+    

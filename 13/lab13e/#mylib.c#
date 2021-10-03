@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "mylib.h"
+
+
+
+
+
+void *erealloc(void *p, size_t s) {
+    void *result = realloc(p, s);
+    if (NULL == result) {
+        fprintf(stderr, "Memory reallocation failed.\n");
+        exit(EXIT_FAILURE);
+    }
+    return result;
+}

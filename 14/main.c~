@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "mylib.h"
+#include "bst.h"
+
+void print_key(char *s) {
+    printf("%s\n", s);
+}
+
+
+int main(void) {
+
+    bst b = bst_new();
+    char word[120];
+  
+
+    while (1 == scanf("%s", word)) {
+        b = bst_insert(b, word);
+       
+    }
+
+    bst_preorder(b, print_key);
+    puts("*****");
+    bst_inorder(b, print_key);
+   
+    while (1 == scanf("%s", word)) {
+        b = bst_delete(b, word);
+    }
+
+    bst_preorder(b, print_key);
+    
+    bst_free(b);
+
+    return EXIT_SUCCESS;
+}
+    
+
+    
+    
+        
+       
